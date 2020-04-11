@@ -5,6 +5,7 @@
  */
 package com.yashpatel.FreshVotes;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
@@ -12,15 +13,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * @author Yash Patel
  */
 public class UserDetailsTest {
-   
-    public static  void gen_encrypted_password(){
-    
-        BCryptPasswordEncoder encoder  = new BCryptPasswordEncoder();
-        String rawpwd = "asdfasdf";
-        String encodedpwd = encoder.encode(rawpwd);
-        
-        System.out.println(encodedpwd);
-        assert(rawpwd != encodedpwd);
-        
-    }
+//    @Test
+//    public static  void gen_encrypted_password(){
+//    
+//        BCryptPasswordEncoder encoder  = new BCryptPasswordEncoder();
+//        String rawpwd = "asdfasdf";
+//        String encodedpwd = encoder.encode(rawpwd);
+//        
+//        System.out.println(encodedpwd);
+//        assert(rawpwd != encodedpwd);
+//        
+//    }
 }

@@ -33,18 +33,18 @@ public class CustomSecurityUser extends User implements UserDetails{
     
     @Override
     public Set<Authority> getAuthorities() {
-    return this.getAuthorities();
+        return super.getAuthorities();
     }
 
     
     @Override
     public String getPassword() {
-    return this.getPassword();
+        return super.getPassword();
     }
 
     @Override
     public String getUsername() {
-    return this.getUsername();
+        return super.getUsername();
     }
 
     // wats to determine if the user is actiive are not 
