@@ -8,6 +8,7 @@ class FreshVotesApplicationTests {
 
 	@Test
 	void contextLoads() {
+            
 	}
 
 }
