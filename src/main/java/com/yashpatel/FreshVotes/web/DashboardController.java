@@ -5,7 +5,13 @@
  */
 package com.yashpatel.FreshVotes.web;
 
+import com.yashpatel.FreshVotes.repositories.UserRepository;
+import com.yashpatel.domain.User;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,15 +25,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class DashboardController {
     
     
+    
     @RequestMapping(value = "/" , method=RequestMethod.GET)
     public String rootView(){
-    return "index";
+        return "index";
     }
     
     @RequestMapping(value = "/dashboard" , method=RequestMethod.GET)
-    public String dashboard(){
-    return "dashboard";
+    public String dashboard(@AuthenticationPrincipal User user,ModelMap model){
+        model.put("user", user);
+        return "dashboard";
     }
+    
     
     
 }
