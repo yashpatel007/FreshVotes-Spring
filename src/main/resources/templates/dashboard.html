@@ -21,26 +21,43 @@ and open the template in the editor.
         -->
     </head>
     <body>
+         <div th:replace="fragments/header :: headerElement"></div>
         <div class="container">
             <div class="row mt-2">
                 <div class="col-10">
                     <h2 th:text="|Dashboard: ${user.name}|"></h2>
                 </div>
-                <div class="col-2">
-                    <form action="/logout" method="post">
-                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                        <button type="submit" class="btn btn-secondary">logout</button>
-                    </form>
-                </div>
             </div>
         </div>
         <div class="container mt-5" style="background-color: gray; height:200px;">
+            <div class="row pt-3">
+                <div class="col">
+                    <h2>Services</h2>
+                </div>
+            </div>
             <div class="row">
                 <div class="col mt-3">
                     <form action="/products" method="post">
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                         <button type="submit" class="btn btn-primary" id="createProduct">Create Product</button>
                     </form>
+                </div>
+            </div>
+        </div>
+        <div class="container pt-3" th:if="${products != null}">
+            <div clas="row">
+                <div clas="col mt-5">
+                    <h2>Products</h2>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-4" th:each="product : ${products}">
+                    <div class="jumbotron">
+                        <h1 th:text="${product.name}">Hello, world!</h1>
+                        <hr class="my-4">
+                        <a class="btn btn-primary btn-lg" th:href="@{/products/{productID}(productID=${product.id})}" role="button">Edit</a>
+                    </div>
                 </div>
             </div>
         </div>

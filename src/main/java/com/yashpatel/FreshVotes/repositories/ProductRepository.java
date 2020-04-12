@@ -6,7 +6,11 @@
 package com.yashpatel.FreshVotes.repositories;
 
 import com.yashpatel.domain.Product;
+import com.yashpatel.domain.User;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -17,4 +21,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
     
+    List<Product> findByIdAndUser(Long id, User user);
+    
+    @Query("select p from Product p"+" join fetch p.user"
+            +" where p.id = :id" )
+    Optional<Product> findByIdWithUser(Long id);
+    
+    
+    List<Product> findByUser(User user);
 }

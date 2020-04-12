@@ -9,6 +9,7 @@ import com.yashpatel.FreshVotes.repositories.ProductRepository;
 import com.yashpatel.domain.Product;
 import com.yashpatel.domain.User;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 import javassist.NotFoundException;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -33,26 +35,34 @@ public class ProductController {
     private ProductRepository productRepo;
     
     @GetMapping("/products")
-    public String getProducts(){
-        return "product";
+    public String getProducts(ModelMap model, @AuthenticationPrincipal User user){
+      
+        return "products";
     } 
     
     @GetMapping("/products/{productID}")
-    public String getProduct(@PathVariable Long productID, ModelMap model, HttpServletResponse response) throws  IOException{
+    public String getProduct(@PathVariable Long productID, ModelMap model, HttpServletResponse response, @AuthenticationPrincipal User user) throws  IOException{
         // optional is kinda wrapper which says that this object can be null thus avoiding null pointer exception
-        Optional<Product> productOpt = productRepo.findById(productID);
+        Optional<Product> productOpt = productRepo.findByIdWithUser(productID);
         
+        model.put("user", user);
         if(productOpt.isPresent()){
             Product product = productOpt.get();
             model.put("product", product);
         }else{
-           
-           
-         response.sendError(HttpStatus.NOT_FOUND.value(),"product with product id "+productID+" not found");
+            response.sendError(HttpStatus.NOT_FOUND.value(),"product with product id "+productID+" not found");
             return "product";
         }
         
         return "product";
+    }
+    
+    @PostMapping("/products/{productID}")
+    public String saveProduct(@PathVariable Long productID, @ModelAttribute Product product,@AuthenticationPrincipal User user){
+        System.out.println(product);
+        //product.setUser(user);
+        product = productRepo.save(product);
+        return "redirect:/products/"+product.getId();
     }
     
     

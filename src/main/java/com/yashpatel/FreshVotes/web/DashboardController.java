@@ -5,8 +5,11 @@
  */
 package com.yashpatel.FreshVotes.web;
 
+import com.yashpatel.FreshVotes.repositories.ProductRepository;
 import com.yashpatel.FreshVotes.repositories.UserRepository;
+import com.yashpatel.domain.Product;
 import com.yashpatel.domain.User;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,7 +27,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class DashboardController {
     
-    
+    @Autowired
+    ProductRepository productRepo;
     
     @RequestMapping(value = "/" , method=RequestMethod.GET)
     public String rootView(){
@@ -33,7 +37,9 @@ public class DashboardController {
     
     @RequestMapping(value = "/dashboard" , method=RequestMethod.GET)
     public String dashboard(@AuthenticationPrincipal User user,ModelMap model){
-        model.put("user", user);
+        List<Product> products = productRepo.findByUser(user);
+        model.put("user", user);  
+        model.put("products", products);
         return "dashboard";
     }
     

@@ -29,6 +29,7 @@ and open the template in the editor.
     <title>Hello, world!</title>
   </head>
   <body>
+      <div th:replace="fragments/header :: headerElement"></div>
     <div class="container m-5 col-4 col-sd-3">
         <h2>Register</h2>
           <form action="/register" method="post">

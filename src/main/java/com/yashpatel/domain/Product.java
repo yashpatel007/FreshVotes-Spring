@@ -77,6 +77,11 @@ public class Product {
     public void setFeatures(Set<Feature> features) {
         this.features = features;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" + "id=" + id + ", name=" + name + ", user=" + user + ", features=" + features + ", published=" + published + '}';
+    }
     
     
     
