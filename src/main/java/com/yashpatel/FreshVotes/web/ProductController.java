@@ -46,13 +46,11 @@ public class ProductController {
             Product product = productOpt.get();
             model.put("product", product);
         }else{
-            
-            //response.setStatus(HttpStatus.NOT_FOUND.value());
-            response.sendError(HttpStatus.NOT_FOUND.value(),"product with product id "+productID+" not found");
-            //throw new NotFoundException("Product with Id"+productID+" not found.");
+           
+           
+         response.sendError(HttpStatus.NOT_FOUND.value(),"product with product id "+productID+" not found");
             return "product";
         }
-        
         
         return "product";
     }
