@@ -24,5 +24,36 @@ and open the template in the editor.
   </head>
   <body>
       <div th:replace="fragments/header :: headerElement"></div>
+      <div class="container">
+          <div class="row mt-4" th:each="product : ${allproducts}">
+              <div class="col">
+                  <div class="card">
+                    <!-- ====== heading ============ -->
+                     <div th:text="${product.name}" class="card-header">
+                      Featured
+                    </div>
+                    
+                    <div class="card-body">
+                          <p>
+                            <a class="btn btn-primary" data-toggle="collapse" th:href="|#collapseExample${product.id}|" role="button" aria-expanded="false" aria-controls="collapseExample">
+                              Add Feature
+                            </a>
+                          </p>
+                        <div class="collapse" th:id="|collapseExample${product.id}|">
+                            <div class="card col-4 card-body">
+                                <input id="title" name="title" class="form-control form-control-sm m-1" type="text" placeholder="Feature Title">
+                               <div class="input-group">
+                                    <textarea placeholder="Feature Description" class="form-control" aria-label="With textarea"></textarea>
+                               </div>
+                               <button type="submit" class="btn btn-primary m-1">Add</button>        
+                            </div>
+                        </div>
+                        </form>
+                       
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
   </body>
 </html>

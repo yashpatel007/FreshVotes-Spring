@@ -15,6 +15,10 @@ import javax.persistence.ManyToOne;
  *
  * @author Yash Patel
  */
+
+// POST -> freshvotes.com/ptoducts/{productId}/fratures   (create a feature request)
+// get -> freshvotes.com/ptoducts/{productId}/fratures/{featureId} (get a feature)
+
 @Entity
 public class Feature {
 
@@ -69,7 +73,9 @@ public class Feature {
 
     @Override
     public String toString() {
-        return "Feature{" + "id=" + id + ", title=" + title + ", description=" + description + ", status=" + status + '}';
+        return "Feature{" + "id=" + id + ", title=" + title + ", description=" + description + ", status=" + status + ", product=" + product + '}';
     }
+
+    
     
 }

@@ -31,7 +31,9 @@ public class DashboardController {
     ProductRepository productRepo;
     
     @RequestMapping(value = "/" , method=RequestMethod.GET)
-    public String rootView(){
+    public String rootView(ModelMap model){
+        List<Product> allprod = productRepo.findAll();
+        model.put("allproducts", allprod);
         return "index";
     }
     
